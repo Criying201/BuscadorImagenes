@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login y Registro de Usuario</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #4CA1AF;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .container {
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            width: 300px;
+        }
+        h2 {
+            margin: 0 0 20px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #4CA1AF;
+            border-radius: 3px;
+        }
+        input[type="submit"] {
+            background: #4CA1AF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background: #258cd1;
+        }
+        .toggle-button {
+            cursor: pointer;
+            color: #4CA1AF;
+            text-decoration: underline;
+        }
+        #register-form, #forgot-password-form {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Bienvenido</h2>
+        <div id="login-form">
+            <form id="login" onsubmit="return false;">
+                <input type="text" id="loginUsername" placeholder="Usuario" required>
+                <input type="password" id="loginPassword" placeholder="Contraseña" required>
+                <input type="submit" value="Iniciar Sesión" id="loginButton">
+                <p class="toggle-button" id="showRegisterButton">Crear Usuario</p>
+                <p class="toggle-button" id="showForgotPasswordButton">¿Olvidaste tu contraseña?</p>
+            </form>
+        </div>
+        <div id="register-form">
+            <form id="register" onsubmit="return false;">
+                <input type="text" id="registerUsername" placeholder="Nuevo Usuario" required>
+                <input type="password" id="registerPassword" placeholder="Nueva Contraseña" required>
+                <input type="submit" value="Registrarse" id="registerButton">
+                <p class="toggle-button" id="showLoginButton">Iniciar Sesión</p>
+            </form>
+        </div>
+        <div id="forgot-password-form">
+            <form id="forgotPassword" onsubmit="return false;">
+                <input type="text" id="forgotPasswordEmail" placeholder="Correo electrónico" required>
+                <input type="submit" value="Restablecer Contraseña" id="forgotPasswordButton">
+                <p class="toggle-button" id="showLoginButton2">Iniciar Sesión</p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById("login-form");
+        const registerForm = document.getElementById("register-form");
+        const forgotPasswordForm = document.getElementById("forgot-password-form");
+        const showLoginButton = document.getElementById("showLoginButton");
+        const showLoginButton2 = document.getElementById("showLoginButton2");
+        const showRegisterButton = document.getElementById("showRegisterButton");
+        const showForgotPasswordButton = document.getElementById("showForgotPasswordButton");
+        
+        const loginUsernameInput = document.getElementById("loginUsername");
+        const loginPasswordInput = document.getElementById("loginPassword");
+        const loginButton = document.getElementById("loginButton");
+        const registerUsernameInput = document.getElementById("registerUsername");
+        const registerPasswordInput = document.getElementById("registerPassword");
+        const registerButton = document.getElementById("registerButton");
+        const forgotPasswordEmailInput = document.getElementById("forgotPasswordEmail");
+        const forgotPasswordButton = document.getElementById("forgotPasswordButton");
+
+        showRegisterButton.addEventListener("click", () => {
+            loginForm.style.display = "none";
+            registerForm.style.display = "block";
+            forgotPasswordForm.style.display = "none";
+        });
+
+        showLoginButton.addEventListener("click", () => {
+            loginForm.style.display = "block";
+            registerForm.style.display = "none";
+            forgotPasswordForm.style.display = "none";
+        });
+
+        showLoginButton2.addEventListener("click", () => {
+            loginForm.style.display = "block";
+            registerForm.style.display = "none";
+            forgotPasswordForm.style.display = "none";
+        });
+
+        showForgotPasswordButton.addEventListener("click", () => {
+            loginForm.style.display = "none";
+            registerForm.style.display = "none";
+            forgotPasswordForm.style.display = "block";
+        });
+
+        loginUsernameInput.addEventListener("input", validateLoginFields);
+        loginPasswordInput.addEventListener("input", validateLoginFields);
+        registerUsernameInput.addEventListener("input", validateRegisterFields);
+        registerPasswordInput.addEventListener("input", validateRegisterFields);
+        forgotPasswordEmailInput.addEventListener("input", validateForgotPasswordFields);
+
+        function validateLoginFields() {
+            loginButton.disabled = !loginUsernameInput.value || !loginPasswordInput.value;
+        }
+
+        function validateRegisterFields() {
+            registerButton.disabled = !registerUsernameInput.value || !registerPasswordInput.value;
+        }
+
+        function validateForgotPasswordFields() {
+            forgotPasswordButton.disabled = !forgotPasswordEmailInput.value;
+        }
+
+        document.getElementById("loginButton").addEventListener("click", () => {
+            if (loginButton.disabled) {
+                alert("Por favor, complete todos los campos requeridos.");
+                return false;
+            }
+            // Redirigir a la página de inicio de sesión dentro del mismo proyecto
+            window.location.href = "Inicio.html";
+        });
+
+        document.getElementById("registerButton").addEventListener("click", () => {
+            if (registerButton.disabled) {
+                alert("Por favor, complete todos los campos requeridos.");
+                return false;
+            }
+            // Redirigir a la página de registro dentro del mismo proyecto
+            window.location.href = "Inicio.html";
+        });
+
+        document.getElementById("forgotPasswordButton").addEventListener("click", () => {
+            if (forgotPasswordButton.disabled) {
+                alert("Por favor, complete todos los campos requeridos.");
+                return false;
+            }
+            // Agregar lógica para restablecer la contraseña aquí
+            alert("Se ha enviado un enlace de restablecimiento de contraseña a su correo electrónico.");
+        });
+    </script>
+</body>
+</html>
